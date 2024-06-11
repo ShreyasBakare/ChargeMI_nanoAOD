@@ -1,0 +1,33 @@
+Here are my NanoAOD algorithms to plot Electron's & Muon's Charge Misidentification (MI) rates w.r.t. their Pt and Eta, (1.) using gen info and (2.) w/o using gen info. ((2.) is only for Drell Yan samples [for DATA])
+
+This repository contains the following 
+
+(Following plots are made using the whole 2018 Monte Carlo sample of Drell-Yan (DY) events comprising of about 200 million DY events as inputs)
+(Here suffix "DATA" represents particular charge MI rates, (2.) w/o using gen info. And no suffix means (1.) using gen info.)
+1. Final/ElecMI-eta.png
+2. Final/ElecMI-etaDATA.png
+3. Final/ElecMI-pt.png
+4. Final/ElecMI-ptDATA.png
+5. Final/MuonMI-eta.png
+6. Final/MuonMI-etaDATA.png
+7. Final/MuonMI-Pt.png
+8. Final/MuonMI-PtDATA.png
+
+9. ana.C (ana.C is a driver script.)
+10. nano9Ana.C
+11. nano9Ana.h (The main code (which does analysis and fills histograms) is in the nano9Ana class. This class is declared and described in nanoAna9.h and nano9Ana.C)
+12. inputs/<FILENAME> (This <FILENAME> will be your input. Update this <FILENAME> in ana.C)
+13. outputs/ (your output files will be saved here) (Present output files, output/hst_DY.root & output/hst_DY.txt, are created using 195,479,686 Drell Yan Monte Carlo events)
+14. make_eff.C (This script will take numerator & denominator histograms from your output.root file and make the final rate plots for you)
+15. and this README
+
+After all editing is done, we run the code as follows
+
+> root -l
+
+[].L nano9Ana.C+ (or without + for not creating a shared object/ Library.)
+[].x ana.C(0)  (Here 0 for DY - 1 for TTbar - 2 for TTZ - 3 for WZ - 4 for ZZ)
+                ((1.) Algorithm using gen info will work on any samples but (2.) algorithm w/o using gen info [DATA] is only for Drell Yan samples)
+[].x make_eff.C (Here, for charge MI rate plots (2.) w/o using gen info, use DATA mode [by using suffix "DATA" for numerator histograms]. Do not use suffix DATA for (1.) using gen info plots)
+
+This will produce output files hst_DY.root and sum_DY.txt along with 4 plots (1. Electron's charge MI rate w.r.t. electron's pt, 2. Electron's charge MI rate w.r.t. electron's eta, 3. Muon's charge MI rate w.r.t. muon's pt, 4. Muon's charge MI rate w.r.t. muon's eta)
